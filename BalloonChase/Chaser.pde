@@ -2,7 +2,6 @@ public class Chaser {
   public PVector pos, vel, acc;
   public int SIZE = 20;
   public float MAX_SPEED = 5;
-  public Balloon targetBalloon;
   
   public Chaser() {
     pos = new PVector(width,height).mult(0.5);
@@ -11,11 +10,12 @@ public class Chaser {
   }
   
   public void move() {
+    vel.add(acc);
     pos.add(vel); 
   }
   
   public void chase(Balloon[] bs) {
-    targetBalloon = target(bs);
+    Balloon targetBalloon = target(bs);
     
     PVector perfectVel = PVector
       .sub(targetBalloon.pos,pos)
