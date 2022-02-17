@@ -6,6 +6,8 @@ public void setup() {
 }
 
 public void draw() {
+  background(220);
+  
   chaser.move();
   chaser.draw();
 }

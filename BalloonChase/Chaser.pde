@@ -1,21 +1,43 @@
 public class Chaser {
-  public PVector pos, vel;
+  public PVector pos, vel, acc;
   public int SIZE = 20;
   public float MAX_SPEED = 5;
+  public Balloon targetBalloon;
   
   public Chaser() {
     pos = new PVector(width,height).mult(0.5);
     vel = new PVector(0,0);
+    acc = new PVector(0,0);
   }
   
   public void move() {
     pos.add(vel); 
   }
   
+  public void chase(Balloon[] bs) {
+    targetBalloon = target(bs);
+    
+    PVector perfectVel = PVector
+      .sub(targetBalloon.pos,pos)
+      .limit(MAX_SPEED);
+    acc = PVector
+      .sub(perfectVel,vel)
+      .limit(MAX_SPEED * 0.1);
+  }
+  
+  private Balloon target(Balloon[] balloons) {
+    
+    return balloons[0];
+  }
+  
   public void draw() {
-    fill(0,255,0);
-    rect(pos.x,pos.y,SIZE/2,SIZE/2);
-    fill(0,0,255);
-    rect(pos.x,pos.y + SIZE/2,SIZE/2,SIZE);
+    pushMatrix();
+    translate(pos.x, pos.y);
+    rotate(PVector.angleBetween(vel,new PVector(0,-1)));
+    fill(255);
+    circle(0,0,SIZE);
+    fill(0);
+    circle(0,-SIZE/3,SIZE/3);
+    popMatrix();
   }
 }
