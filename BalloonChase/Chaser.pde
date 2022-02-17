@@ -1,6 +1,6 @@
 public class Chaser {
   public PVector pos, vel;
-  public int SIZE = 10;
+  public int SIZE = 20;
   public float MAX_SPEED = 5;
   
   public Chaser() {
@@ -13,6 +13,9 @@ public class Chaser {
   }
   
   public void draw() {
-    
+    fill(0,255,0);
+    rect(pos.x,pos.y,SIZE/2,SIZE/2);
+    fill(0,0,255);
+    rect(pos.x,pos.y + SIZE/2,SIZE/2,SIZE);
   }
 }
